@@ -1,0 +1,23 @@
+{
+  "name": "https-express",
+  "version": "1.0.0",
+  "description": "Https Express server",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "app/index.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonmitsev/https-express.git"
+  },
+  "keywords": [
+    "https",
+    "express"
+  ],
+  "author": "Anton Mitsev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antonmitsev/https-express/issues"
+  },
+  "homepage": "https://github.com/antonmitsev/https-express#readme"
+}
