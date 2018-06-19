@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Https Express server",
   "main": "app/index.js",
+  "dependencies": {
+    "express": "*"
+  },
   "scripts": {
-    "test": "app/index.test.js"
+    "test": "nodemon app/index.test.js",
+    "start": "nodemon app/index.js"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,7 @@
+#Keys
+keys
+*.key
+
 # Logs
 logs
 *.log
