@@ -6,14 +6,10 @@ const conf = require('./config.js');
  * Module dependencies.
  */
 
-<<<<<<< HEAD
 var appl = require('./core/app.js');
 
 var app = new appl();
 var app2 = new appl({applicationName: "nodetest"});
-=======
-var app = require('./core/app.js');
->>>>>>> fa8e4d71558726a8086b8f31fa848d88dd6e315b
 
 
 var debug = require('debug')('demo:server');
