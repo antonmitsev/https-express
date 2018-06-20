@@ -15,3 +15,5 @@ State or Province Name (full name) [Some-State]:California
 A challenge password []:
 ...
 $ openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt -subject localhost
+
+$ artillery quick -k --count 50 -n 50 http://10.22.41.64:3000 >50x50_http1.log
