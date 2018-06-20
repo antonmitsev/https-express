@@ -1,31 +1,45 @@
-var express = require('express');
-const http2 = require('http2');
-var https = require('https');
-var http = require('http');
-var fs = require('fs');
+const port = 3000
+const spdy = require('spdy')
+const express = require('express')
+const path = require('path')
+const fs = require('fs')
 
-// This line is from the Node.js HTTPS documentation.
-var options = {
+const app = express()
+
+
+app.get('*', (req, res) => {
+  res
+    .status(200)
+    .json({message: 'ok'})
+})
+
+const options = {
   key: fs.readFileSync('keys/server.key'),
-  cert: fs.readFileSync('keys/server.crt')
-};
+  cert:  fs.readFileSync('keys/server.crt')
+}
 
-// Create a service (the app object is just a callback).
-var app = express();
+spdy
+  .createServer(options, app)
+  .listen(port, (error) => {
+    if (error) {
+      console.error(error)
+      return process.exit(1)
+    } else {
+      console.log('Listening on port: ' + port + '.')
+    }
+  }, function() {   //POSIX based - chane user ID not to work with root!
+  // Listening
+    try {
+      console.log('Old User ID: ' + process.getuid() + ', Old Group ID: ' + process.getgid());
+      process.setgid('users');
+      process.setuid('tlhunter');
+      console.log('New User ID: ' + process.getuid() + ', New Group ID: ' + process.getgid());
+    } catch (err) {
+      console.log('Cowardly refusing to keep the process alive as root.');
+      //process.exit(1);
+    }
+  }
 
+);
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-app.use('/', function(req, res){
-      res.send('Mara!');
-});
-
-
-// Create an HTTP service.
-http.createServer(app).listen(80);
-// Create an HTTPS service identical to the HTTP service.
-http2.createSecureServer(options, app).listen(443);
 
